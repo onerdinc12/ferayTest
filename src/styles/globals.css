@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-black text-white antialiased;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600;
+  }
+  
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-sm;
+  }
+  
+  .button-primary {
+    @apply px-6 py-3 bg-purple-600 hover:bg-purple-700 
+           rounded-full transition-all duration-300 
+           transform hover:scale-105;
+  }
+}
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  .card-hover-effect {
+    @apply transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20;
+  }
+  
+  .gradient-border {
+    background: linear-gradient(to right, #9333ea, #ec4899);
+    background-clip: padding-box;
+  }
+}
+
+/* Animasyonlar */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
+  to { box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); }
+}
+
+@keyframes particleAnimation {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, -50%, 0); }
+}
+
+@keyframes lightPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+/* Utility Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.video-card-glow {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+  animation: glow 3s ease-in-out infinite alternate;
+}
+
+.particles {
+  @apply absolute inset-0;
+  background: url('/images/particles.png');
+  background-repeat: repeat;
+  animation: particleAnimation 20s linear infinite;
+  opacity: 0.3;
+}
+
+.light-effect {
+  @apply absolute w-full h-full;
+  background: radial-gradient(
+    circle at 50% 50%, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%
+  );
+  animation: lightPulse 4s ease-in-out infinite;
+} 

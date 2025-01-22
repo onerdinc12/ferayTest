@@ -1,0 +1,16 @@
+saygı1-website/
+├── src/
+│   ├── components/
+│   │   ├── Hero.tsx
+│   │   ├── VoteSection.tsx
+│   │   └── Footer.tsx
+│   ├── pages/
+│   │   └── index.tsx
+│   └── styles/
+│       └── globals.css
+├── public/
+│   └── images/
+├── tailwind.config.js
+├── next.config.js
+├── tsconfig.json
+└── package.json 
