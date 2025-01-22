@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import { Toaster } from 'react-hot-toast'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
           }
         }}
       />
+      <SpeedInsights />
     </>
   )
 } 
