@@ -40,6 +40,8 @@ const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
   index: number
   hasVotedAny: boolean
 }) => {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
     <motion.div
       key={`${video.id}-${index}`}
@@ -63,16 +65,27 @@ const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
                      transform group-hover:scale-[1.02]">
         {/* Video Thumbnail */}
         <div className="aspect-video relative">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+          {/* Loading spinner */}
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 z-30">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            </div>
+          )}
+          
           <iframe
+            onLoad={() => setIsLoading(false)}
             width="100%"
             height="100%"
             src={`https://www.youtube.com/embed/${video.id}`}
             title={video.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="border-0"
+            className="w-full h-full z-10"
+            style={{ position: 'relative', pointerEvents: 'auto' }}
           />
+
+          {/* Gradient overlay - videonun üstünde ama tıklamayı engellemeyecek */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-20" />
         </div>
         
         {/* Video Bilgileri */}
