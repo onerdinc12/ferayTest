@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import BackgroundAnimation from './BackgroundAnimation'
 
 export default function Hero() {
@@ -82,31 +83,38 @@ export default function Hero() {
       <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">
         {/* Üst Kısım */}
         <div className="space-y-8 mb-20">
-          <motion.h1
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="gradient-text text-6xl md:text-8xl font-bold"
+            className="w-64 md:w-96 mx-auto"
           >
-            SAYGI1
-          </motion.h1>
+            <Image
+              src="/images/logo.png"
+              alt="SAYGI1 Logo"
+              width={400}
+              height={200}
+              className="w-full h-auto"
+              priority
+            />
+          </motion.div>
 
           <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-xl md:text-2xl text-purple-200"
+            className="text-xl md:text-2xl text-yellow-200"
           >
-            Türkiye'nin En Büyük Konser Organizasyonu
+            Bu Konser Değildir. Bu Bir Etkinlik Değildir. Bu Bizim Hayallerimizdir.
           </motion.p>
 
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="text-lg md:text-xl text-purple-300/80"
+            className="text-lg md:text-xl text-yellow-300/80"
           >
-            "Müziğin Birleştirici Gücü"
+            "Hayallerimize Hoş Geldiniz"
           </motion.div>
 
           {/* Geri Sayım */}
@@ -117,20 +125,20 @@ export default function Hero() {
             className="flex justify-center gap-6 text-center py-8"
           >
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-purple-400">{timeLeft.days}</div>
-              <div className="text-purple-200/80 text-sm">GÜN</div>
+              <div className="text-4xl font-bold text-yellow-400">{timeLeft.days}</div>
+              <div className="text-yellow-200/80 text-sm">GÜN</div>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-purple-400">{timeLeft.hours}</div>
-              <div className="text-purple-200/80 text-sm">SAAT</div>
+              <div className="text-4xl font-bold text-yellow-400">{timeLeft.hours}</div>
+              <div className="text-yellow-200/80 text-sm">SAAT</div>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-purple-400">{timeLeft.minutes}</div>
-              <div className="text-purple-200/80 text-sm">DAKİKA</div>
+              <div className="text-4xl font-bold text-yellow-400">{timeLeft.minutes}</div>
+              <div className="text-yellow-200/80 text-sm">DAKİKA</div>
             </div>
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-purple-400">{timeLeft.seconds}</div>
-              <div className="text-purple-200/80 text-sm">SANİYE</div>
+              <div className="text-4xl font-bold text-yellow-400">{timeLeft.seconds}</div>
+              <div className="text-yellow-200/80 text-sm">SANİYE</div>
             </div>
           </motion.div>
 
@@ -138,7 +146,7 @@ export default function Hero() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-xl md:text-2xl font-light text-purple-300/60"
+            className="text-xl md:text-2xl font-light text-yellow-300/60"
           >
             Bir Sonraki SAYGI1'e Kalan Süre
           </motion.div>
@@ -158,7 +166,7 @@ export default function Hero() {
             transition={{ delay: 1.4 }}
             className="mb-12"
           >
-            <span className="bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 text-purple-200 text-sm md:text-base">
+            <span className="bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 text-yellow-200 text-sm md:text-base">
               ⭐ En İyi Performansı Seçmek İçin Aşağı Kaydır ⭐
             </span>
           </motion.div>
@@ -174,7 +182,7 @@ export default function Hero() {
               repeatType: "reverse"
             }}
           >
-            <div className="text-purple-300/80 text-sm mb-4">
+            <div className="text-yellow-300/80 text-sm mb-4">
               Aşağı Kaydır
             </div>
             <motion.div
@@ -184,7 +192,7 @@ export default function Hero() {
                 repeat: Infinity,
                 repeatType: "reverse"
               }}
-              className="w-6 h-10 border-2 border-purple-400/50 rounded-full mx-auto 
+              className="w-6 h-10 border-2 border-yellow-400/50 rounded-full mx-auto 
                          flex justify-center items-start p-1"
             >
               <motion.div
@@ -194,7 +202,7 @@ export default function Hero() {
                   repeat: Infinity,
                   repeatType: "reverse"
                 }}
-                className="w-1.5 h-3 bg-purple-400 rounded-full"
+                className="w-1.5 h-3 bg-yellow-400 rounded-full"
               />
             </motion.div>
           </motion.div>

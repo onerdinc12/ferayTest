@@ -62,7 +62,7 @@ export default function BackgroundAnimation() {
 
           if (distance < 100) {
             ctx.beginPath()
-            ctx.strokeStyle = `rgba(147, 51, 234, ${0.2 - distance/500})`
+            ctx.strokeStyle = `rgba(234, 179, 8, ${0.2 - distance/500})`
             ctx.moveTo(particle.x, particle.y)
             ctx.lineTo(otherParticle.x, otherParticle.y)
             ctx.stroke()

@@ -14,7 +14,7 @@
 
 @layer components {
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600;
   }
   
   .glass-effect {
@@ -22,7 +22,7 @@
   }
   
   .button-primary {
-    @apply px-6 py-3 bg-purple-600 hover:bg-purple-700 
+    @apply px-6 py-3 bg-yellow-500 hover:bg-yellow-600 
            rounded-full transition-all duration-300 
            transform hover:scale-105;
   }
@@ -38,11 +38,11 @@
   }
   
   .card-hover-effect {
-    @apply transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20;
+    @apply transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/20;
   }
   
   .gradient-border {
-    background: linear-gradient(to right, #9333ea, #ec4899);
+    background: linear-gradient(to right, #eab308, #ca8a04);
     background-clip: padding-box;
   }
 }
@@ -55,8 +55,8 @@
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 20px rgba(139, 92, 246, 0.2); }
-  to { box-shadow: 0 0 30px rgba(139, 92, 246, 0.4); }
+  from { box-shadow: 0 0 20px rgba(234, 179, 8, 0.2); }
+  to { box-shadow: 0 0 30px rgba(234, 179, 8, 0.4); }
 }
 
 @keyframes particleAnimation {
@@ -75,7 +75,7 @@
 }
 
 .video-card-glow {
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 0 30px rgba(234, 179, 8, 0.2);
   animation: glow 3s ease-in-out infinite alternate;
 }
 
