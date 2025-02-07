@@ -21,6 +21,31 @@ export async function checkIfIpVoted(ip: string): Promise<boolean> {
   return !!data
 }
 
+// Platform bilgisini al
+function getPlatformInfo(): string {
+  if (typeof window === 'undefined') return 'unknown'
+
+  const userAgent = window.navigator.userAgent
+  const platform = window.navigator.platform
+  const browserInfo = {
+    chrome: /chrome/i.test(userAgent),
+    safari: /safari/i.test(userAgent),
+    firefox: /firefox/i.test(userAgent),
+    opera: /opera/i.test(userAgent),
+    edge: /edge/i.test(userAgent),
+    mobile: /mobile/i.test(userAgent)
+  }
+
+  let browser = 'Diğer'
+  if (browserInfo.chrome) browser = 'Chrome'
+  else if (browserInfo.safari) browser = 'Safari'
+  else if (browserInfo.firefox) browser = 'Firefox'
+  else if (browserInfo.opera) browser = 'Opera'
+  else if (browserInfo.edge) browser = 'Edge'
+
+  return `${platform} - ${browser}${browserInfo.mobile ? ' (Mobile)' : ''}`
+}
+
 // Oy kullanma fonksiyonu
 export async function castVote(videoId: string, voterIp: string) {
   const hasVoted = await checkIfIpVoted(voterIp)
@@ -29,12 +54,15 @@ export async function castVote(videoId: string, voterIp: string) {
     throw new Error('Bu IP adresi daha önce oy kullanmış.')
   }
 
+  const platformInfo = getPlatformInfo()
+
   const { data, error } = await supabase
     .from('votes')
     .insert([
       {
         video_id: videoId,
         voter_ip: voterIp,
+        platform: platformInfo,
         voted_at: new Date().toISOString()
       }
     ])
