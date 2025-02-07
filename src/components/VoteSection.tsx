@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { CacheManager } from '../utils/cache'
 import { checkIfIpVoted, castVote, getVoteCount } from '../utils/supabase'
 import toast from 'react-hot-toast'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Video {
   id: string
@@ -18,6 +19,16 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
   onConfirm: () => void
   videoTitle: string
 }) => {
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null)
+
+  const handleConfirm = () => {
+    if (!captchaValue) {
+      toast.error('Lütfen robot olmadığınızı doğrulayın.')
+      return
+    }
+    onConfirm()
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,10 +53,16 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
               <span className="block mt-2 text-yellow-300 font-semibold">
                 Kullandığınız oy geri alınamaz.
               </span>
-              <span className="block mt-2">
-                Emin misiniz?
-              </span>
             </p>
+
+            <div className="flex justify-center mb-6">
+              <ReCAPTCHA
+                sitekey="6LfRXYEpAAAAAJH3fNwfJXxgCQxbDJsDHgvwzHXC"
+                onChange={(value) => setCaptchaValue(value)}
+                theme="dark"
+              />
+            </div>
+
             <div className="flex justify-end gap-4">
               <button
                 onClick={onClose}
@@ -55,10 +72,13 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
                 İptal
               </button>
               <button
-                onClick={onConfirm}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 
-                         hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold
-                         transition-all duration-300 transform hover:scale-105"
+                onClick={handleConfirm}
+                className={`px-6 py-2 rounded-full transition-all duration-300 font-semibold
+                          ${!captchaValue 
+                            ? 'bg-gray-600 cursor-not-allowed text-gray-300' 
+                            : 'bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black transform hover:scale-105'
+                          }`}
+                disabled={!captchaValue}
               >
                 Evet, Oy Ver
               </button>
