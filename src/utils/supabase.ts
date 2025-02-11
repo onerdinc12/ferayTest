@@ -19,19 +19,13 @@ function setBrowserVote(): void {
 
 // IP adresi kontrolü için fonksiyon
 export async function checkIfVoted(ip: string): Promise<boolean> {
-  // Önce tarayıcı cache kontrolü
-  if (checkBrowserVote()) {
-    return true
-  }
-
-  // Sonra IP kontrolü
   const { data, error } = await supabase
     .from('votes')
     .select('id')
     .eq('voter_ip', ip)
     .single()
 
-  if (error) {
+  if (error && error.code !== 'PGRST116') {
     console.error('IP kontrol hatası:', error)
     return false
   }

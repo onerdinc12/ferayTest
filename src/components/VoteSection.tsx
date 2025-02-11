@@ -61,7 +61,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle, onCaptchaChange 
 
             <div className="flex justify-center mb-6">
               <ReCAPTCHA
-                sitekey="6Lf6OtQqAAAAAHB0pOoEeNiqdMMEHK3D4F6omiiC"
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                 onChange={(value) => {
                   setCaptchaValue(value)
                   onCaptchaChange(value)
@@ -236,17 +236,21 @@ export default function VoteSection() {
   const [userIp, setUserIp] = useState<string>('')
   const cache = CacheManager.getInstance()
 
-  // IP adresini al
+  // IP adresini al ve oy kontrolü yap
   useEffect(() => {
     const getIp = async () => {
       try {
+        // IP al
         const res = await fetch('/api/getIp')
         const data = await res.json()
         setUserIp(data.ip)
         
-        // IP ile oy kullanılmış mı kontrol et
-        const hasVoted = await checkIfVoted(data.ip)
-        setHasVoted(hasVoted)
+        // IP veya localStorage kontrolü
+        const hasVotedIp = await checkIfVoted(data.ip)
+        const hasVotedLocal = localStorage.getItem('hasVoted') === 'true'
+        
+        // İkisinden biri varsa oy kullanılmış demektir
+        setHasVoted(hasVotedIp || hasVotedLocal)
       } catch (error) {
         console.error('IP alma hatası:', error)
       }
@@ -279,6 +283,7 @@ export default function VoteSection() {
     try {
       await castVote(videoId, userIp)
       setHasVoted(true)
+      localStorage.setItem('hasVoted', 'true')
       
       // Oy sayılarını güncelle
       const updatedVideos = await Promise.all(

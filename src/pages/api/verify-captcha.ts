@@ -1,6 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-const RECAPTCHA_SECRET_KEY = '6Lf6OtQqAAAAAIxdCS8Dxzzuh0166JvPs37bGokz'
+// Kullanılmış token'ları takip etmek için Set
+const usedTokens = new Set<string>()
+
+// Secret key'i environment variable'dan al
+const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY!
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -8,6 +12,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const { captchaValue } = req.body
+
+  // Token daha önce kullanılmış mı kontrol et
+  if (usedTokens.has(captchaValue)) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Bu CAPTCHA token daha önce kullanılmış.' 
+    })
+  }
 
   try {
     // Google reCAPTCHA API'sine istek at
@@ -22,12 +34,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await response.json()
 
     if (data.success) {
+      // Token'ı kullanılmış olarak işaretle
+      usedTokens.add(captchaValue)
+      
+      // 2 dakika sonra token'ı sil (temizlik için)
+      setTimeout(() => {
+        usedTokens.delete(captchaValue)
+      }, 2 * 60 * 1000)
+
       return res.status(200).json({ success: true })
     } else {
-      return res.status(400).json({ success: false, message: 'CAPTCHA doğrulaması başarısız.' })
+      return res.status(400).json({ 
+        success: false, 
+        message: 'CAPTCHA doğrulaması başarısız.' 
+      })
     }
   } catch (error) {
     console.error('CAPTCHA doğrulama hatası:', error)
-    return res.status(500).json({ success: false, message: 'CAPTCHA doğrulanırken bir hata oluştu.' })
+    return res.status(500).json({ 
+      success: false, 
+      message: 'CAPTCHA doğrulanırken bir hata oluştu.' 
+    })
   }
 } 
