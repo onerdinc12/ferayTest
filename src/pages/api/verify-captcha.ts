@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import rateLimiter from '../../lib/rate-limit'
 
 // Kullanılmış token'ları takip etmek için Set
 const usedTokens = new Set<string>()
@@ -9,6 +10,18 @@ const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY!
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
+  }
+
+  // IP adresini al
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown'
+  const clientIp = Array.isArray(ip) ? ip[0] : ip
+
+  // Rate limiting kontrolü
+  if (!rateLimiter(clientIp, 'captcha')) {
+    return res.status(429).json({ 
+      success: false, 
+      message: 'Çok fazla deneme yaptınız. Lütfen biraz bekleyin.' 
+    })
   }
 
   const { captchaValue } = req.body
