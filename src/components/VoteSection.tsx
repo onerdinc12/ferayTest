@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback, memo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CacheManager } from '../utils/cache'
-import { checkIfIpVoted, castVote, getVoteCount } from '../utils/supabase'
+import { checkIfVoted, castVote, getVoteCount } from '../utils/supabase'
 import toast from 'react-hot-toast'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Video {
   id: string
@@ -12,12 +13,23 @@ interface Video {
 }
 
 // Modal bileşeni
-const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
+const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle, onCaptchaChange }: {
   isOpen: boolean
   onClose: () => void
   onConfirm: () => void
   videoTitle: string
+  onCaptchaChange: (value: string | null) => void
 }) => {
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null)
+
+  const handleConfirm = () => {
+    if (!captchaValue) {
+      toast.error('Lütfen robot olmadığınızı doğrulayın.')
+      return
+    }
+    onConfirm()
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -46,6 +58,18 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
                 Emin misiniz?
               </span>
             </p>
+
+            <div className="flex justify-center mb-6">
+              <ReCAPTCHA
+                sitekey="6Lf6OtQqAAAAAHB0pOoEeNiqdMMEHK3D4F6omiiC"
+                onChange={(value) => {
+                  setCaptchaValue(value)
+                  onCaptchaChange(value)
+                }}
+                theme="dark"
+              />
+            </div>
+
             <div className="flex justify-end gap-4">
               <button
                 onClick={onClose}
@@ -55,10 +79,14 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
                 İptal
               </button>
               <button
-                onClick={onConfirm}
-                className="px-6 py-2 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 
-                         hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold
-                         transition-all duration-300 transform hover:scale-105"
+                onClick={handleConfirm}
+                className={`px-6 py-2 rounded-full font-semibold
+                         transition-all duration-300 transform hover:scale-105
+                         ${!captchaValue 
+                           ? 'bg-gray-600 cursor-not-allowed' 
+                           : 'bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black'
+                         }`}
+                disabled={!captchaValue}
               >
                 Evet, Oy Ver
               </button>
@@ -72,12 +100,13 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, videoTitle }: {
 
 const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
   video: Video
-  onVote: (videoId: string) => void
+  onVote: (videoId: string, captchaValue: string) => void
   index: number
   hasVotedAny: boolean
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [captchaValue, setCaptchaValue] = useState<string | null>(null)
 
   const handleVoteClick = () => {
     if (!hasVotedAny) {
@@ -85,9 +114,30 @@ const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
     }
   }
 
-  const handleConfirmVote = () => {
-    setShowConfirm(false)
-    onVote(video.id)
+  const handleConfirmVote = async () => {
+    if (!captchaValue) return
+
+    try {
+      // CAPTCHA doğrulaması
+      const response = await fetch('/api/verify-captcha', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ captchaValue }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setShowConfirm(false)
+        onVote(video.id, captchaValue)
+      } else {
+        toast.error('CAPTCHA doğrulaması başarısız oldu. Lütfen tekrar deneyin.')
+      }
+    } catch (error) {
+      toast.error('CAPTCHA doğrulanırken bir hata oluştu. Lütfen tekrar deneyin.')
+    }
   }
 
   return (
@@ -97,6 +147,7 @@ const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
         onClose={() => setShowConfirm(false)}
         onConfirm={handleConfirmVote}
         videoTitle={video.title}
+        onCaptchaChange={setCaptchaValue}
       />
       
       <motion.div
@@ -194,7 +245,7 @@ export default function VoteSection() {
         setUserIp(data.ip)
         
         // IP ile oy kullanılmış mı kontrol et
-        const hasVoted = await checkIfIpVoted(data.ip)
+        const hasVoted = await checkIfVoted(data.ip)
         setHasVoted(hasVoted)
       } catch (error) {
         console.error('IP alma hatası:', error)
@@ -222,7 +273,7 @@ export default function VoteSection() {
     return () => clearInterval(interval)
   }, [])
 
-  const handleVote = useCallback(async (videoId: string) => {
+  const handleVote = useCallback(async (videoId: string, captchaValue: string) => {
     if (hasVoted || !userIp) return
 
     try {

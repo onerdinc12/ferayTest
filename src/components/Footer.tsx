@@ -24,7 +24,7 @@ export default function Footer() {
               SAYGI1
             </motion.h3>
             <p className="text-yellow-200/70 max-w-md">
-              Türkiye'nin en büyük müzik organizasyonu. 
+              Hayallerimize Hoş Geldiniz. 
               Eşsiz performanslar ve unutulmaz anlar için bizi takip edin.
             </p>
           </div>

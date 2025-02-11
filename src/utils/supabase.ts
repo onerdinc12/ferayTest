@@ -5,8 +5,26 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
+// Tarayıcı cache kontrolü için fonksiyon
+function checkBrowserVote(): boolean {
+  if (typeof window === 'undefined') return false
+  return localStorage.getItem('hasVoted') === 'true'
+}
+
+// Tarayıcıya oy kullanıldı bilgisini kaydet
+function setBrowserVote(): void {
+  if (typeof window === 'undefined') return
+  localStorage.setItem('hasVoted', 'true')
+}
+
 // IP adresi kontrolü için fonksiyon
-export async function checkIfIpVoted(ip: string): Promise<boolean> {
+export async function checkIfVoted(ip: string): Promise<boolean> {
+  // Önce tarayıcı cache kontrolü
+  if (checkBrowserVote()) {
+    return true
+  }
+
+  // Sonra IP kontrolü
   const { data, error } = await supabase
     .from('votes')
     .select('id')
@@ -46,12 +64,12 @@ function getPlatformInfo(): string {
   return `${platform} - ${browser}${browserInfo.mobile ? ' (Mobile)' : ''}`
 }
 
-// Oy kullanma fonksiyonu
+// Oy kullanma fonksiyonu güncelleniyor
 export async function castVote(videoId: string, voterIp: string) {
-  const hasVoted = await checkIfIpVoted(voterIp)
+  const hasVoted = await checkIfVoted(voterIp)
   
   if (hasVoted) {
-    throw new Error('Bu IP adresi daha önce oy kullanmış.')
+    throw new Error('Bu tarayıcı veya IP adresi ile daha önce oy kullanılmış.')
   }
 
   const platformInfo = getPlatformInfo()
@@ -71,6 +89,9 @@ export async function castVote(videoId: string, voterIp: string) {
     console.error('Oy kullanma hatası:', error)
     throw error
   }
+
+  // Oy başarılı olduysa tarayıcıya kaydet
+  setBrowserVote()
 
   return data
 }

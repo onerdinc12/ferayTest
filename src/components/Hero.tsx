@@ -13,7 +13,7 @@ export default function Hero() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   const calculateTimeLeft = useCallback(() => {
-    const targetDate = new Date('2025-06-01T00:00:00')
+    const targetDate = new Date('2025-02-27T21:00:00')
     const now = new Date()
     const difference = targetDate.getTime() - now.getTime()
 
@@ -26,8 +26,8 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    // Bir sonraki SAYGI1 tarihi: 2025 Haziran 1
-    const targetDate = new Date('2025-06-01T00:00:00')
+    // Oylama bitiş tarihi: 27 Şubat 2024 saat 21:00
+    const targetDate = new Date('2025-02-27T21:00:00')
 
     const timer = setInterval(() => {
       const now = new Date()
@@ -105,17 +105,10 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="text-xl md:text-2xl text-yellow-200"
           >
-            Bu Konser Değildir. Bu Bir Etkinlik Değildir. Bu Bizim Hayallerimizdir.
+            Saygı1 jüri üyeleri ve müzik direktörü tarafından yapılan değerlendirme sonucunda, finale kalan 10 isim belirlendi! Şimdi sıra sizde! Bu 10 isimden bir kişiyi seçerek, kazananı siz belirliyorsunuz. Kazanan isim, mor ve ötesi'nin sahnesinde unutulmaz bir performans sergileme şansına sahip olacak!
           </motion.p>
 
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="text-lg md:text-xl text-yellow-300/80"
-          >
-            "Hayallerimize Hoş Geldiniz"
-          </motion.div>
+         
 
           {/* Geri Sayım */}
           <motion.div
