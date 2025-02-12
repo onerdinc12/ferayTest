@@ -42,17 +42,35 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/20 z-10" />
           <div className="relative w-full h-full">
-            <Image
-              src="/images/Saygı1_MVO_1200x630.png"
-              alt="SAYGI1 Mor ve Ötesi Afiş"
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-              className="object-contain md:object-cover"
-              style={{ objectPosition: 'center center' }}
-              priority
-              quality={100}
-              unoptimized={true}
-            />
+            {/* Mobil için afiş */}
+            <div className="block md:hidden w-full h-full">
+              <Image
+                src="/images/Saygi1_Mobile.png"
+                alt="SAYGI1 Mor ve Ötesi Afiş"
+                fill
+                sizes="100vw"
+                className="object-cover"
+                style={{ objectPosition: 'center center' }}
+                priority
+                quality={100}
+                unoptimized={true}
+              />
+            </div>
+            
+            {/* Desktop için afiş */}
+            <div className="hidden md:block w-full h-full">
+              <Image
+                src="/images/Saygı1_MVO_1200x630.png"
+                alt="SAYGI1 Mor ve Ötesi Afiş"
+                fill
+                sizes="100vw"
+                className="object-contain"
+                style={{ objectPosition: 'center center' }}
+                priority
+                quality={100}
+                unoptimized={true}
+              />
+            </div>
           </div>
         </div>
       </section>
