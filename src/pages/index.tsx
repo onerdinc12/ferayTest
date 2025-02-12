@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react'
 export default function Home() {
   const [isSertabParticipantsOpen, setIsSertabParticipantsOpen] = useState(false)
   const [isCezaParticipantsOpen, setIsCezaParticipantsOpen] = useState(false)
+  const [isSertabHostsOpen, setIsSertabHostsOpen] = useState(false)
+  const [isCezaHostsOpen, setIsCezaHostsOpen] = useState(false)
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -139,30 +141,28 @@ export default function Home() {
               </div>
               
               {/* Sertab Katılımcı Listesi */}
-              <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                <button
-                  onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
-                  className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                >
-                  <span>Sertab Erener - SAYGI1 Sanatçılar</span>
-                  <FaChevronDown
-                    className={`transform transition-transform duration-300 ${
-                      isSertabParticipantsOpen ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-                
-                {isSertabParticipantsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid md:grid-cols-2 gap-8"
+              <div className="space-y-4">
+                {/* Sanatçılar Akordiyon */}
+                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                  <button
+                    onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
+                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                   >
-                    {/* Sanatçılar */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Sanatçılar</h4>
+                    <span>Sertab Erener - SAYGI1 Sanatçılar</span>
+                    <FaChevronDown
+                      className={`transform transition-transform duration-300 ${
+                        isSertabParticipantsOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {isSertabParticipantsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <ul className="space-y-1 text-white">
                         <li>Aleyna Tilki</li>
                         <li>Can Ozan</li>
@@ -184,11 +184,31 @@ export default function Home() {
                         <li>Soner Sarıkabadayı</li>
                         <li>TNK</li>
                       </ul>
-                    </div>
+                    </motion.div>
+                  )}
+                </div>
 
-                    {/* Sunucular */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Sunucular</h4>
+                {/* Sunucular Akordiyon */}
+                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                  <button
+                    onClick={() => setIsSertabHostsOpen(!isSertabHostsOpen)}
+                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
+                  >
+                    <span>Sertab Erener - SAYGI1 Sunucular</span>
+                    <FaChevronDown
+                      className={`transform transition-transform duration-300 ${
+                        isSertabHostsOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {isSertabHostsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <ul className="space-y-1 text-white">
                         <li>Arda Türkmen</li>
                         <li>Berk Uçar</li>
@@ -212,9 +232,9 @@ export default function Home() {
                         <li>Sarp Bozkurt</li>
                         <li>Somer Sivrioğlu</li>
                       </ul>
-                    </div>
-                  </motion.div>
-                )}
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </motion.div>
 
@@ -239,30 +259,28 @@ export default function Home() {
               </div>
 
               {/* Ceza Katılımcı Listesi */}
-              <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                <button
-                  onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
-                  className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                >
-                  <span>Ceza - SAYGI1 Sanatçılar</span>
-                  <FaChevronDown
-                    className={`transform transition-transform duration-300 ${
-                      isCezaParticipantsOpen ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-                
-                {isCezaParticipantsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid md:grid-cols-2 gap-8"
+              <div className="space-y-4">
+                {/* Sanatçılar Akordiyon */}
+                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                  <button
+                    onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
+                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                   >
-                    {/* Sanatçılar */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Sanatçılar</h4>
+                    <span>Ceza - SAYGI1 Sanatçılar</span>
+                    <FaChevronDown
+                      className={`transform transition-transform duration-300 ${
+                        isCezaParticipantsOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {isCezaParticipantsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <ul className="space-y-1 text-white">
                         <li>Anıl Piyancı</li>
                         <li>Ayben</li>
@@ -282,11 +300,31 @@ export default function Home() {
                         <li>Şehinşah</li>
                         <li>Yener Çevik</li>
                       </ul>
-                    </div>
+                    </motion.div>
+                  )}
+                </div>
 
-                    {/* Sunucular */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-white mb-2">Sunucular</h4>
+                {/* Sunucular Akordiyon */}
+                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                  <button
+                    onClick={() => setIsCezaHostsOpen(!isCezaHostsOpen)}
+                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
+                  >
+                    <span>Ceza - SAYGI1 Sunucular</span>
+                    <FaChevronDown
+                      className={`transform transition-transform duration-300 ${
+                        isCezaHostsOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  
+                  {isCezaHostsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <ul className="space-y-1 text-white">
                         <li>Ali Biçim</li>
                         <li>Arem & Arman</li>
@@ -307,9 +345,9 @@ export default function Home() {
                         <li>Pınar Sabancı</li>
                         <li>Timur Acar</li>
                       </ul>
-                    </div>
-                  </motion.div>
-                )}
+                    </motion.div>
+                  )}
+                </div>
               </div>
             </motion.div>
           </div>
