@@ -31,7 +31,7 @@ export default function Footer() {
 
           {/* Hızlı Linkler */}
           <div className="space-y-4">
-            <h4 className="text-xl font-semibold text-yellow-200">Hızlı Erişim</h4>
+            <h4 className="text-xl font-semibold text-yellow-400">Hızlı Erişim</h4>
             <ul className="space-y-2">
               {['Ana Sayfa', 'Performanslar', 'Biletler', 'Hakkımızda', 'İletişim'].map((item) => (
                 <li key={item}>
@@ -49,7 +49,7 @@ export default function Footer() {
 
           {/* İletişim */}
           <div className="space-y-4">
-            <h4 className="text-xl font-semibold text-yellow-200">İletişim</h4>
+            <h4 className="text-xl font-semibold text-yellow-400">İletişim</h4>
             <div className="space-y-2 text-yellow-200/60">
               <p>Email: info@saygi1.com</p>
               <p>Tel: +90 (555) 123 45 67</p>

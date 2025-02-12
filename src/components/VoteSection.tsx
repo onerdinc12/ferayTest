@@ -172,8 +172,7 @@ const VideoCard = memo(({ video, onVote, index, hasVotedAny }: {
         </div>
         <div className="p-6">
           <div className="mb-4">
-            <h3 className="text-xl font-bold text-yellow-200 group-hover:text-white
-                         transition-colors duration-300">
+            <h3 className="text-xl font-bold text-white transition-colors duration-300">
               {video.title}
             </h3>
           </div>
@@ -229,6 +228,31 @@ export default function VoteSection() {
   const [videos] = useState<Video[]>(initialVideos)
   const [hasVoted, setHasVoted] = useState(false)
   const [userIp, setUserIp] = useState<string>('')
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
+
+  // Geri sayım için useEffect
+  useEffect(() => {
+    const targetDate = new Date('2025-02-27T21:00:00')
+
+    const timer = setInterval(() => {
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   // IP adresini al ve oy kontrolü yap
   useEffect(() => {
@@ -290,11 +314,11 @@ export default function VoteSection() {
   }, [hasVoted, userIp])
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-black via-yellow-900/20 to-black">
+    <section className="py-12 px-4 bg-black">
       <motion.h2 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-6xl font-bold text-center mb-20 gradient-text"
+        className="text-6xl font-bold text-center mb-12 gradient-text"
       >
         En İyi Performansı Seç
       </motion.h2>
@@ -317,6 +341,45 @@ export default function VoteSection() {
             />
           ))}
         </div>
+
+        {/* Geri Sayım Bölümü */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-32 mb-20"
+        >
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mb-8"
+          >
+            <h3 className="text-3xl font-bold gradient-text mb-2">Oylamanın Sonuna Kalan Süre</h3>
+            <p className="text-yellow-200/60">27 Şubat 2025, 21:00'a kadar oy kullanabilirsiniz</p>
+          </motion.div>
+
+          <div className="flex justify-center gap-8">
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-6 min-w-[120px]
+                          transform hover:scale-105 transition-all duration-300">
+              <div className="text-5xl font-bold text-yellow-400 mb-2">{timeLeft.days}</div>
+              <div className="text-yellow-200/80 text-sm uppercase tracking-wider">Gün</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-6 min-w-[120px]
+                          transform hover:scale-105 transition-all duration-300">
+              <div className="text-5xl font-bold text-yellow-400 mb-2">{timeLeft.hours}</div>
+              <div className="text-yellow-200/80 text-sm uppercase tracking-wider">Saat</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-6 min-w-[120px]
+                          transform hover:scale-105 transition-all duration-300">
+              <div className="text-5xl font-bold text-yellow-400 mb-2">{timeLeft.minutes}</div>
+              <div className="text-yellow-200/80 text-sm uppercase tracking-wider">Dakika</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-6 min-w-[120px]
+                          transform hover:scale-105 transition-all duration-300">
+              <div className="text-5xl font-bold text-yellow-400 mb-2">{timeLeft.seconds}</div>
+              <div className="text-yellow-200/80 text-sm uppercase tracking-wider">Saniye</div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

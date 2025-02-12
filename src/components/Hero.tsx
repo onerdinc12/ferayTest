@@ -1,47 +1,12 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
 import Image from 'next/image'
-import BackgroundAnimation from './BackgroundAnimation'
 
 export default function Hero() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  })
   const [isScrolled, setIsScrolled] = useState(false)
 
-  const calculateTimeLeft = useCallback(() => {
-    const targetDate = new Date('2025-02-27T21:00:00')
-    const now = new Date()
-    const difference = targetDate.getTime() - now.getTime()
-
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60)
-    }
-  }, [])
-
+  // Scroll event listener ekle
   useEffect(() => {
-    // Oylama bitiş tarihi: 27 Şubat 2024 saat 21:00
-    const targetDate = new Date('2025-02-27T21:00:00')
-
-    const timer = setInterval(() => {
-      const now = new Date()
-      const difference = targetDate.getTime() - now.getTime()
-
-      setTimeLeft({
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
-      })
-    }, 1000)
-
-    // Scroll event listener ekle
     const handleScroll = () => {
       const scrollPosition = window.scrollY
       setIsScrolled(scrollPosition > 100) // 100px scroll sonrası kaybolsun
@@ -49,14 +14,12 @@ export default function Hero() {
 
     window.addEventListener('scroll', handleScroll)
     return () => {
-      clearInterval(timer)
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      <BackgroundAnimation />
       {/* Video Arka Plan */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/50 z-10" /> {/* Overlay */}
@@ -72,14 +35,7 @@ export default function Hero() {
         </video>
       </div>
 
-      {/* Animasyonlu Parçacıklar */}
-      <div className="absolute inset-0 z-[1]">
-        <div className="absolute top-0 left-0 w-full h-full 
-                       bg-gradient-to-b from-black via-transparent to-black opacity-80" />
-        <div className="particles absolute inset-0" /> {/* Parçacık animasyonu için */}
-      </div>
-
-      {/* Ana İçerik - z-index'i artırıldı */}
+      {/* Ana İçerik */}
       <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">
         {/* Üst Kısım */}
         <div className="space-y-8 mb-20">
@@ -103,46 +59,10 @@ export default function Hero() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-xl md:text-2xl text-yellow-200"
+            className="text-xl md:text-2xl text-white"
           >
             Saygı1 jüri üyeleri ve müzik direktörü tarafından yapılan değerlendirme sonucunda, finale kalan 10 isim belirlendi! Şimdi sıra sizde! Bu 10 isimden bir kişiyi seçerek, kazananı siz belirliyorsunuz. Kazanan isim, mor ve ötesi'nin sahnesinde unutulmaz bir performans sergileme şansına sahip olacak!
           </motion.p>
-
-         
-
-          {/* Geri Sayım */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="flex justify-center gap-6 text-center py-8"
-          >
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-yellow-400">{timeLeft.days}</div>
-              <div className="text-yellow-200/80 text-sm">GÜN</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-yellow-400">{timeLeft.hours}</div>
-              <div className="text-yellow-200/80 text-sm">SAAT</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-yellow-400">{timeLeft.minutes}</div>
-              <div className="text-yellow-200/80 text-sm">DAKİKA</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 min-w-[100px]">
-              <div className="text-4xl font-bold text-yellow-400">{timeLeft.seconds}</div>
-              <div className="text-yellow-200/80 text-sm">SANİYE</div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="text-xl md:text-2xl font-light text-yellow-300/60"
-          >
-            Bir Sonraki SAYGI1'e Kalan Süre
-          </motion.div>
         </div>
 
         {/* Alt Kısım - Sabit Pozisyonlar */}
