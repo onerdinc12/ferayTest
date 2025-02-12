@@ -19,11 +19,11 @@ export default function Footer() {
             <motion.h3 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-4xl font-bold gradient-text"
+              className="text-4xl font-bold text-white"
             >
               SAYGI1
             </motion.h3>
-            <p className="text-yellow-200/70 max-w-md">
+            <p className="text-white max-w-md">
               Hayallerimize Hoş Geldiniz. 
               Eşsiz performanslar ve unutulmaz anlar için bizi takip edin.
             </p>
@@ -31,8 +31,8 @@ export default function Footer() {
 
           {/* İletişim */}
           <div className="space-y-4">
-            <h4 className="text-xl font-semibold text-yellow-400">İletişim</h4>
-            <div className="space-y-2 text-yellow-200/60">
+            <h4 className="text-xl font-semibold text-white">İletişim</h4>
+            <div className="space-y-2 text-white">
               <p>Email: info@saygi1.com</p>
               <p>Tel: +90 (555) 123 45 67</p>
               <p>Adres: İstanbul, Türkiye</p>
@@ -59,7 +59,7 @@ export default function Footer() {
         {/* Alt Çizgi */}
         <div className="border-t border-yellow-500/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center 
-                          text-sm text-yellow-200/40">
+                          text-sm text-white">
             <p>© 2024 SAYGI1. Tüm hakları saklıdır.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a href="#" className="hover:text-yellow-200 transition-colors duration-300">

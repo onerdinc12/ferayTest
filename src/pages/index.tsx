@@ -82,7 +82,7 @@ export default function Home() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-2xl md:text-4xl text-center text-yellow-200 font-bold mb-12"
+            className="text-2xl md:text-4xl text-center text-white font-bold mb-12"
           >
             Saygı1 - mor ve ötesi, 27 Şubat Perşembe akşamı Ülker Etkinlik ve Spor Salonu'nda
           </motion.p>
@@ -111,7 +111,7 @@ export default function Home() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center gradient-text mb-12"
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-12"
           >
             SAYGI1 Performansları
           </motion.h2>
@@ -131,7 +131,7 @@ export default function Home() {
                   width="100%"
                   height="100%"
                   src="https://www.youtube.com/embed/kvSaawzWcVU?si=AvQmYuD5nqTpsmqf"
-                  title="Sertap Erener SAYGI1"
+                  title="Sertab Erener SAYGI1"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="w-full h-full"
@@ -142,7 +142,7 @@ export default function Home() {
               <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
                 <button
                   onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
-                  className="w-full flex items-center justify-between text-xl font-bold text-yellow-400 mb-4"
+                  className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                 >
                   <span>Sertab Erener - SAYGI1 Sanatçılar</span>
                   <FaChevronDown
@@ -162,8 +162,8 @@ export default function Home() {
                   >
                     {/* Sanatçılar */}
                     <div>
-                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sanatçılar</h4>
-                      <ul className="space-y-1 text-yellow-200/80">
+                      <h4 className="text-lg font-semibold text-white mb-2">Sanatçılar</h4>
+                      <ul className="space-y-1 text-white">
                         <li>Aleyna Tilki</li>
                         <li>Can Ozan</li>
                         <li>Ceylan Ertem</li>
@@ -188,8 +188,8 @@ export default function Home() {
 
                     {/* Sunucular */}
                     <div>
-                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sunucular</h4>
-                      <ul className="space-y-1 text-yellow-200/80">
+                      <h4 className="text-lg font-semibold text-white mb-2">Sunucular</h4>
+                      <ul className="space-y-1 text-white">
                         <li>Arda Türkmen</li>
                         <li>Berk Uçar</li>
                         <li>Bilal Vildi</li>
@@ -242,7 +242,7 @@ export default function Home() {
               <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
                 <button
                   onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
-                  className="w-full flex items-center justify-between text-xl font-bold text-yellow-400 mb-4"
+                  className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                 >
                   <span>Ceza - SAYGI1 Sanatçılar</span>
                   <FaChevronDown
@@ -262,8 +262,8 @@ export default function Home() {
                   >
                     {/* Sanatçılar */}
                     <div>
-                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sanatçılar</h4>
-                      <ul className="space-y-1 text-yellow-200/80">
+                      <h4 className="text-lg font-semibold text-white mb-2">Sanatçılar</h4>
+                      <ul className="space-y-1 text-white">
                         <li>Anıl Piyancı</li>
                         <li>Ayben</li>
                         <li>Baneva</li>
@@ -286,8 +286,8 @@ export default function Home() {
 
                     {/* Sunucular */}
                     <div>
-                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sunucular</h4>
-                      <ul className="space-y-1 text-yellow-200/80">
+                      <h4 className="text-lg font-semibold text-white mb-2">Sunucular</h4>
+                      <ul className="space-y-1 text-white">
                         <li>Ali Biçim</li>
                         <li>Arem & Arman</li>
                         <li>Berk Keklik</li>
@@ -323,7 +323,7 @@ export default function Home() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold gradient-text mb-8"
+            className="text-4xl md:text-5xl font-bold text-white mb-8"
           >
             SaygıBiz'e Oy Kullan
           </motion.h2>
@@ -333,7 +333,7 @@ export default function Home() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-xl text-yellow-200/80 mb-12"
+            className="text-xl text-white mb-12"
           >
             Finale kalan 10 yetenekten birini seçerek, mor ve ötesi sahnesinde
             performans sergileme şansı kazanmasına yardımcı ol!
@@ -362,29 +362,29 @@ export default function Home() {
             animate={{ opacity: 1 }}
             className="text-center mb-8 px-4 mt-32"
           >
-            <h3 className="text-2xl md:text-3xl font-bold gradient-text mb-2">SAYGI1'e Kalan Zaman</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">SAYGI1'e Kalan Zaman</h3>
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 px-4">
             <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
                         transform hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.days}</div>
-              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Gün</div>
+              <div className="text-3xl md:text-5xl font-bold text-white mb-2">{timeLeft.days}</div>
+              <div className="text-white text-xs md:text-sm uppercase tracking-wider">Gün</div>
             </div>
             <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
                         transform hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.hours}</div>
-              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Saat</div>
+              <div className="text-3xl md:text-5xl font-bold text-white mb-2">{timeLeft.hours}</div>
+              <div className="text-white text-xs md:text-sm uppercase tracking-wider">Saat</div>
             </div>
             <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
                         transform hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.minutes}</div>
-              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Dakika</div>
+              <div className="text-3xl md:text-5xl font-bold text-white mb-2">{timeLeft.minutes}</div>
+              <div className="text-white text-xs md:text-sm uppercase tracking-wider">Dakika</div>
             </div>
             <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
                         transform hover:scale-105 transition-all duration-300">
-              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.seconds}</div>
-              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Saniye</div>
+              <div className="text-3xl md:text-5xl font-bold text-white mb-2">{timeLeft.seconds}</div>
+              <div className="text-white text-xs md:text-sm uppercase tracking-wider">Saniye</div>
             </div>
           </div>
         </div>
