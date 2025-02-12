@@ -6,6 +6,22 @@ import { adminLogin, verifyMFA, completeMFASetup, checkAdminSession } from '../.
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { GetServerSideProps } from 'next'
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { admin } = context.params as { admin: string }
+  
+  // Sadece doğru admin URL'i ile erişime izin ver
+  if (admin !== 'dashboard-feray-x8k2p9') {
+    return {
+      notFound: true // Bu 404 sayfasına yönlendirecek
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
 
 export default function AdminPanel() {
   const router = useRouter()
