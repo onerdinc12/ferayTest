@@ -1,13 +1,377 @@
-import { useState } from 'react'
-import Hero from '../components/Hero'
-import VoteSection from '../components/VoteSection'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import Image from 'next/image'
+import { FaArrowRight, FaChevronDown } from 'react-icons/fa'
 import Footer from '../components/Footer'
+import { useState, useEffect } from 'react'
 
 export default function Home() {
+  const [isSertabParticipantsOpen, setIsSertabParticipantsOpen] = useState(false)
+  const [isCezaParticipantsOpen, setIsCezaParticipantsOpen] = useState(false)
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  })
+
+  // Geri sayım için useEffect
+  useEffect(() => {
+    const targetDate = new Date('2025-02-27T21:00:00')
+
+    const timer = setInterval(() => {
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
+
+      setTimeLeft({
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <main className="min-h-screen bg-black text-white">
-      <Hero />
-      <VoteSection />
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Afiş Arka Plan */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-black/20 z-10" />
+          <div className="relative w-full h-full">
+            <Image
+              src="/images/Saygı1_MVO_1200x630.png"
+              alt="SAYGI1 Mor ve Ötesi Afiş"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+              className="object-contain md:object-cover"
+              style={{ objectPosition: 'center center' }}
+              priority
+              quality={100}
+              unoptimized={true}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Hakkında Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-4xl text-center text-yellow-200 font-bold mb-12"
+          >
+            Saygı1 - mor ve ötesi, 27 Şubat Perşembe akşamı Ülker Etkinlik ve Spor Salonu'nda
+          </motion.p>
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex justify-center mb-16"
+          >
+            <a
+              href="https://iticket.com.tr/events/music/saygi1-mor-ve-otesi-konseri-bilet"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r 
+                       from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 
+                       text-black font-bold rounded-full transition-all duration-300 
+                       transform hover:scale-105 text-lg shadow-xl"
+            >
+              Bilet Al <FaArrowRight />
+            </a>
+          </motion.div>
+
+          {/* Video Section Title */}
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-center gradient-text mb-12"
+          >
+            SAYGI1 Performansları
+          </motion.h2>
+
+          {/* Video Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Sertap Erener Video */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="space-y-4"
+            >
+              <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/kvSaawzWcVU?si=AvQmYuD5nqTpsmqf"
+                  title="Sertap Erener SAYGI1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+              
+              {/* Sertab Katılımcı Listesi */}
+              <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                <button
+                  onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
+                  className="w-full flex items-center justify-between text-xl font-bold text-yellow-400 mb-4"
+                >
+                  <span>Sertab Erener - SAYGI1 Sanatçılar</span>
+                  <FaChevronDown
+                    className={`transform transition-transform duration-300 ${
+                      isSertabParticipantsOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                {isSertabParticipantsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid md:grid-cols-2 gap-8"
+                  >
+                    {/* Sanatçılar */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sanatçılar</h4>
+                      <ul className="space-y-1 text-yellow-200/80">
+                        <li>Aleyna Tilki</li>
+                        <li>Can Ozan</li>
+                        <li>Ceylan Ertem</li>
+                        <li>Emir Can İğrek (Video ile Katıldı)</li>
+                        <li>Gökhan Türkmen</li>
+                        <li>Kalben</li>
+                        <li>Karsu</li>
+                        <li>Kenan Doğulu</li>
+                        <li>Levent Yüksel</li>
+                        <li>Melek Mosso</li>
+                        <li>Mirkelam</li>
+                        <li>Nil Karaibrahimgil</li>
+                        <li>Nova Norda</li>
+                        <li>Paptircem</li>
+                        <li>Şanışer</li>
+                        <li>Selin Geçit</li>
+                        <li>Sena Şener</li>
+                        <li>Soner Sarıkabadayı</li>
+                        <li>TNK</li>
+                      </ul>
+                    </div>
+
+                    {/* Sunucular */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sunucular</h4>
+                      <ul className="space-y-1 text-yellow-200/80">
+                        <li>Arda Türkmen</li>
+                        <li>Berk Uçar</li>
+                        <li>Bilal Vildi</li>
+                        <li>Cem Gelinoğlu</li>
+                        <li>Danla Bilic</li>
+                        <li>Didem Soydan</li>
+                        <li>Emre Yücelen</li>
+                        <li>Enis Arıkan</li>
+                        <li>Gökçe</li>
+                        <li>Gökhan Çınar</li>
+                        <li>Gülşah Saraçoğlu</li>
+                        <li>Hayrettin</li>
+                        <li>Hikayeden Adamlar</li>
+                        <li>İbrahim Selim</li>
+                        <li>İpek Filiz Yazıcı</li>
+                        <li>Mehmet Yalçınkaya</li>
+                        <li>Melisa Döngel</li>
+                        <li>Oğuzhan Uğur & 9 Kişi</li>
+                        <li>Ömür Ufuk Beydemir</li>
+                        <li>Sarp Bozkurt</li>
+                        <li>Somer Sivrioğlu</li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Ceza Video */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="space-y-4"
+            >
+              <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/Zpgof8hgszg?si=FupWFEZeIjaGSYv4"
+                  title="Ceza SAYGI1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              </div>
+
+              {/* Ceza Katılımcı Listesi */}
+              <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                <button
+                  onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
+                  className="w-full flex items-center justify-between text-xl font-bold text-yellow-400 mb-4"
+                >
+                  <span>Ceza - SAYGI1 Sanatçılar</span>
+                  <FaChevronDown
+                    className={`transform transition-transform duration-300 ${
+                      isCezaParticipantsOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                {isCezaParticipantsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid md:grid-cols-2 gap-8"
+                  >
+                    {/* Sanatçılar */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sanatçılar</h4>
+                      <ul className="space-y-1 text-yellow-200/80">
+                        <li>Anıl Piyancı</li>
+                        <li>Ayben</li>
+                        <li>Baneva</li>
+                        <li>Candan Erçetin</li>
+                        <li>Cartel/Erci E</li>
+                        <li>Çakal</li>
+                        <li>Gazapizm</li>
+                        <li>Gripin</li>
+                        <li>Killa Hakan</li>
+                        <li>Lil Begy</li>
+                        <li>M Lisa</li>
+                        <li>Manga</li>
+                        <li>Ozbi</li>
+                        <li>Sefo</li>
+                        <li>Server Uraz</li>
+                        <li>Şehinşah</li>
+                        <li>Yener Çevik</li>
+                      </ul>
+                    </div>
+
+                    {/* Sunucular */}
+                    <div>
+                      <h4 className="text-lg font-semibold text-yellow-300 mb-2">Sunucular</h4>
+                      <ul className="space-y-1 text-yellow-200/80">
+                        <li>Ali Biçim</li>
+                        <li>Arem & Arman</li>
+                        <li>Berk Keklik</li>
+                        <li>Beyazıt Öztürk (Video ile Katılmıştır)</li>
+                        <li>Bilal Yıldız</li>
+                        <li>Burcu Erenkul</li>
+                        <li>Doğu Demirkol</li>
+                        <li>Doğukan Manço</li>
+                        <li>Emre Karayel</li>
+                        <li>Eser Yenenler</li>
+                        <li>Haruncan</li>
+                        <li>İlker Ayrık</li>
+                        <li>Mesutcan Tomay</li>
+                        <li>Nurgül Yeşilçay</li>
+                        <li>Ogün Sanlısoy (Video ile Katılmıştır)</li>
+                        <li>Özlem Gürses</li>
+                        <li>Pınar Sabancı</li>
+                        <li>Timur Acar</li>
+                      </ul>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* SaygıBiz CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-b from-transparent to-yellow-900/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-bold gradient-text mb-8"
+          >
+            SaygıBiz'e Oy Kullan
+          </motion.h2>
+
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-yellow-200/80 mb-12"
+          >
+            Finale kalan 10 yetenekten birini seçerek, mor ve ötesi sahnesinde
+            performans sergileme şansı kazanmasına yardımcı ol!
+          </motion.p>
+
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+          >
+            <Link
+              href="/saygibiz"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r 
+                       from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 
+                       text-black font-bold rounded-full transition-all duration-300 
+                       transform hover:scale-105 text-lg"
+            >
+              Hemen Oy Ver <FaArrowRight />
+            </Link>
+          </motion.div>
+
+          {/* Geri Sayım Bölümü */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center mb-8 px-4 mt-32"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold gradient-text mb-2">SAYGI1'e Kalan Zaman</h3>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 px-4">
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
+                        transform hover:scale-105 transition-all duration-300">
+              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.days}</div>
+              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Gün</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
+                        transform hover:scale-105 transition-all duration-300">
+              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.hours}</div>
+              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Saat</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
+                        transform hover:scale-105 transition-all duration-300">
+              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.minutes}</div>
+              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Dakika</div>
+            </div>
+            <div className="bg-black/50 backdrop-blur-sm border border-yellow-500/20 rounded-xl p-4 md:p-6 w-[140px] md:min-w-[120px]
+                        transform hover:scale-105 transition-all duration-300">
+              <div className="text-3xl md:text-5xl font-bold text-yellow-400 mb-2">{timeLeft.seconds}</div>
+              <div className="text-yellow-200/80 text-xs md:text-sm uppercase tracking-wider">Saniye</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   )
