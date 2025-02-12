@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, memo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CacheManager } from '../utils/cache'
-import { checkIfVoted, castVote, getVoteCount } from '../utils/supabase'
+import { checkIfVoted, castVote } from '../utils/supabase'
 import toast from 'react-hot-toast'
 import ReCAPTCHA from 'react-google-recaptcha'
 
@@ -9,7 +9,6 @@ interface Video {
   id: string
   title: string
   description: string
-  votes: number
 }
 
 // Modal bileşeni
@@ -208,33 +207,28 @@ export default function VoteSection() {
     { 
       id: 'oDQ5tEkOicg',
       title: 'Hande Yener - Sopa',
-      description: 'Pop Müziğin Kraliçesinden Muhteşem Performans',
-      votes: 0 
+      description: 'Pop Müziğin Kraliçesinden Muhteşem Performans'
     },
     { 
       id: 'sXXPgal-BM0',
       title: 'Sertab Erener - Olsun',
-      description: 'Efsane Şarkının Yeni Yorumu',
-      votes: 0 
+      description: 'Efsane Şarkının Yeni Yorumu'
     },
     { 
       id: 'WBCiQTk5knY',
       title: 'Sertab Erener - Bir Çaresi Bulunur',
-      description: 'Unutulmaz Şarkının SAYGI1 Versiyonu',
-      votes: 0 
+      description: 'Unutulmaz Şarkının SAYGI1 Versiyonu'
     },
     { 
       id: 'NPUTdqYUa9A',
       title: 'EDİS - MARTILAR',
-      description: 'EDİS\'in muhteşem performansı',
-      votes: 0 
+      description: 'EDİS\'in muhteşem performansı'
     }
   ]
 
-  const [videos, setVideos] = useState<Video[]>(initialVideos)
+  const [videos] = useState<Video[]>(initialVideos)
   const [hasVoted, setHasVoted] = useState(false)
   const [userIp, setUserIp] = useState<string>('')
-  const cache = CacheManager.getInstance()
 
   // IP adresini al ve oy kontrolü yap
   useEffect(() => {
@@ -259,24 +253,6 @@ export default function VoteSection() {
     getIp()
   }, [])
 
-  // Oy sayılarını periyodik olarak güncelle
-  useEffect(() => {
-    const updateVoteCounts = async () => {
-      const updatedVideos = await Promise.all(
-        videos.map(async (video) => ({
-          ...video,
-          votes: await getVoteCount(video.id)
-        }))
-      )
-      setVideos(updatedVideos)
-    }
-
-    updateVoteCounts()
-    const interval = setInterval(updateVoteCounts, 30000) // Her 30 saniyede bir güncelle
-
-    return () => clearInterval(interval)
-  }, [])
-
   const handleVote = useCallback(async (videoId: string, captchaValue: string) => {
     if (hasVoted || !userIp) return
 
@@ -284,15 +260,6 @@ export default function VoteSection() {
       await castVote(videoId, userIp)
       setHasVoted(true)
       localStorage.setItem('hasVoted', 'true')
-      
-      // Oy sayılarını güncelle
-      const updatedVideos = await Promise.all(
-        videos.map(async (video) => ({
-          ...video,
-          votes: await getVoteCount(video.id)
-        }))
-      )
-      setVideos(updatedVideos)
 
       toast.success(
         <div className="flex flex-col gap-1">
@@ -320,7 +287,7 @@ export default function VoteSection() {
         }
       )
     }
-  }, [hasVoted, userIp, videos])
+  }, [hasVoted, userIp])
 
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-black via-yellow-900/20 to-black">
