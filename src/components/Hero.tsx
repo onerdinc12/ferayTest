@@ -38,12 +38,12 @@ export default function Hero() {
       {/* Ana İçerik */}
       <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">
         {/* Üst Kısım */}
-        <div className="space-y-8 mb-20">
+        <div className="space-y-8 mb-32 md:mb-20 pt-8">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="w-64 md:w-96 mx-auto"
+            className="w-64 md:w-80 mx-auto"
           >
             <Image
               src="/images/logo.png"
@@ -59,7 +59,7 @@ export default function Hero() {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-xl md:text-2xl text-white"
+            className="text-lg md:text-xl text-white max-w-3xl mx-auto"
           >
             Saygı1 jüri üyeleri ve müzik direktörü tarafından yapılan değerlendirme sonucunda, finale kalan 10 isim belirlendi! Şimdi sıra sizde! Bu 10 isimden bir kişiyi seçerek, kazananı siz belirliyorsunuz. Kazanan isim, mor ve ötesi'nin sahnesinde unutulmaz bir performans sergileme şansına sahip olacak!
           </motion.p>
@@ -67,7 +67,7 @@ export default function Hero() {
 
         {/* Alt Kısım - Sabit Pozisyonlar */}
         <motion.div 
-          className="fixed bottom-0 left-0 right-0 pb-8 z-20"
+          className="fixed bottom-0 left-0 right-0 pb-12 md:pb-8 z-20"
           initial={{ opacity: 1 }}
           animate={{ opacity: isScrolled ? 0 : 1 }}
           transition={{ duration: 0.3 }}
@@ -79,7 +79,8 @@ export default function Hero() {
             transition={{ delay: 1.4 }}
             className="mb-12"
           >
-            <span className="bg-white/5 backdrop-blur-sm rounded-full px-6 py-3 text-yellow-200 text-sm md:text-base">
+            <span className="bg-black/70 backdrop-blur-sm rounded-full px-6 py-3 text-yellow-200 text-sm md:text-base
+                           border border-yellow-500/20">
               ⭐ En İyi Performansı Seçmek İçin Aşağı Kaydır ⭐
             </span>
           </motion.div>

@@ -80,14 +80,44 @@ export default function Home() {
       {/* Hakkında Section */}
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-2xl md:text-4xl text-center text-white font-bold mb-12"
-          >
-            Saygı1 - mor ve ötesi, 27 Şubat Perşembe akşamı Ülker Etkinlik ve Spor Salonu'nda
-          </motion.p>
+          <motion.div className="flex flex-col items-center justify-center space-y-8 mb-12">
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              className="w-64 md:w-96 mx-auto"
+            >
+              <Image
+                src="/images/logo2.png"
+                alt="SAYGI1 Logo 2"
+                width={400}
+                height={200}
+                className="w-full h-auto"
+                priority
+              />
+            </motion.div>
+
+            <motion.div className="flex flex-col items-center justify-center space-y-2">
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-3xl md:text-5xl text-center text-white font-bold"
+              >
+                27 Şubat Perşembe
+              </motion.p>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-xl md:text-2xl text-center text-white/80"
+              >
+                Ülker Etkinlik ve Spor Salonu'nda
+              </motion.p>
+            </motion.div>
+          </motion.div>
 
           <motion.div
             initial={{ y: 20, opacity: 0 }}
