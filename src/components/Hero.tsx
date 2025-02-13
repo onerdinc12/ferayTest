@@ -36,9 +36,9 @@ export default function Hero() {
       </div>
 
       {/* Ana İçerik */}
-      <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto">
+      <div className="relative z-20 text-center px-4 w-full max-w-4xl mx-auto flex flex-col h-full justify-between pb-32">
         {/* Üst Kısım */}
-        <div className="space-y-8 mb-32 md:mb-20 pt-8">
+        <div className="space-y-8 pt-8">
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -67,7 +67,7 @@ export default function Hero() {
 
         {/* Alt Kısım - Sabit Pozisyonlar */}
         <motion.div 
-          className="fixed bottom-0 left-0 right-0 pb-12 md:pb-8 z-20"
+          className="absolute bottom-0 left-0 right-0 pb-8 z-30"
           initial={{ opacity: 1 }}
           animate={{ opacity: isScrolled ? 0 : 1 }}
           transition={{ duration: 0.3 }}
@@ -77,10 +77,10 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4 }}
-            className="mb-12"
+            className="mb-8"
           >
-            <span className="bg-black/70 backdrop-blur-sm rounded-full px-6 py-3 text-yellow-200 text-sm md:text-base
-                           border border-yellow-500/20">
+            <span className="bg-black/90 backdrop-blur-sm rounded-full px-6 py-3 text-yellow-200 text-sm md:text-base
+                           border border-yellow-500/20 shadow-lg">
               ⭐ En İyi Performansı Seçmek İçin Aşağı Kaydır ⭐
             </span>
           </motion.div>
@@ -96,7 +96,7 @@ export default function Hero() {
               repeatType: "reverse"
             }}
           >
-            <div className="text-yellow-300/80 text-sm mb-4">
+            <div className="text-yellow-300/80 text-sm mb-2">
               Aşağı Kaydır
             </div>
             <motion.div
@@ -107,7 +107,7 @@ export default function Hero() {
                 repeatType: "reverse"
               }}
               className="w-6 h-10 border-2 border-yellow-400/50 rounded-full mx-auto 
-                         flex justify-center items-start p-1"
+                         flex justify-center items-start p-1 bg-black/50"
             >
               <motion.div
                 animate={{ y: [0, 12, 0] }}
