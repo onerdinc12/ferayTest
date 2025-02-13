@@ -138,16 +138,6 @@ export default function Home() {
             </a>
           </motion.div>
 
-          {/* Video Section Title */}
-          <motion.h2
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
-          >
-            SAYGI1 Performansları
-          </motion.h2>
-
           {/* Video Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Sertab Erener Bölümü */}
