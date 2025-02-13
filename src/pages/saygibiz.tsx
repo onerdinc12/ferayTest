@@ -8,7 +8,7 @@ export default function SaygiBiz() {
     <main className="min-h-screen bg-black text-white">
       <Hero />
       <VoteSection />
-      <Footer />
+      <Footer isSaygiBiz={true} />
     </main>
   )
 } 

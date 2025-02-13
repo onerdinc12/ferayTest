@@ -1,13 +1,26 @@
 import { motion } from 'framer-motion'
 import { FaInstagram, FaTwitter, FaYoutube, FaTiktok } from 'react-icons/fa'
 
-export default function Footer() {
-  const socialLinks = [
-    { icon: <FaInstagram size={24} />, url: '#', label: 'Instagram' },
-    { icon: <FaTwitter size={24} />, url: '#', label: 'Twitter' },
-    { icon: <FaYoutube size={24} />, url: '#', label: 'YouTube' },
-    { icon: <FaTiktok size={24} />, url: '#', label: 'TikTok' }
-  ]
+interface FooterProps {
+  isSaygiBiz?: boolean
+}
+
+export default function Footer({ isSaygiBiz = false }: FooterProps) {
+  const socialLinks = isSaygiBiz 
+    ? [
+      { icon: <FaInstagram size={24} />, url: 'https://www.instagram.com/saygibizofficial/', label: 'Instagram' },
+      { icon: <FaTwitter size={24} />, url: 'https://x.com/saygibiz', label: 'Twitter' },
+      { icon: <FaYoutube size={24} />, url: 'https://www.youtube.com/@babalaykativi', label: 'YouTube' },
+      { icon: <FaTiktok size={24} />, url: 'https://www.tiktok.com/@saygibizofficial?lang=tr-TR', label: 'TikTok' }
+    ]
+    : [
+      { icon: <FaInstagram size={24} />, url: 'https://www.instagram.com/saygibirofficial/', label: 'Instagram' },
+      { icon: <FaTwitter size={24} />, url: 'https://x.com/saygibir', label: 'Twitter' },
+      { icon: <FaYoutube size={24} />, url: 'https://www.youtube.com/@babalaykativi', label: 'YouTube' },
+      { icon: <FaTiktok size={24} />, url: 'https://www.tiktok.com/@saygibir?lang=tr-TR', label: 'TikTok' }
+    ]
+
+  const email = isSaygiBiz ? 'saygibiz@sinerjimedya.com' : 'saygibir@sinerjimedya.com'
 
   return (
     <footer className="relative bg-black pt-20 pb-10">
@@ -21,11 +34,10 @@ export default function Footer() {
               animate={{ opacity: 1 }}
               className="text-4xl font-bold text-white"
             >
-              SAYGI1
+              SAYGI<span className="text-yellow-400">1</span>
             </motion.h3>
             <p className="text-white max-w-md">
-              Hayallerimize Hoş Geldiniz. 
-              Eşsiz performanslar ve unutulmaz anlar için bizi takip edin.
+              SAYGI1 - mor ve ötesi; birbirinden değerli sanatçılarla unutulmaz bir akşam için sizleri bekliyor.
             </p>
           </div>
 
@@ -33,7 +45,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="text-xl font-semibold text-white">İletişim</h4>
             <div className="space-y-2 text-white">
-              <p>Email: info@saygi1.com</p>
+              <p>Email: {email}</p>
               <p>Tel: +90 (555) 123 45 67</p>
               <p>Adres: İstanbul, Türkiye</p>
             </div>
@@ -46,6 +58,8 @@ export default function Footer() {
             <motion.a
               key={social.label}
               href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.1, y: -2 }}
               className="text-yellow-300/60 hover:text-yellow-300 
                          transition-colors duration-300"

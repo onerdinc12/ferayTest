@@ -143,243 +143,262 @@ export default function Home() {
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-center text-white mb-12"
+            className="text-3xl md:text-4xl font-bold text-center text-white mb-16"
           >
             SAYGI1 Performansları
           </motion.h2>
 
           {/* Video Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Sertap Erener Video */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="space-y-4"
-            >
-              <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/kvSaawzWcVU?si=AvQmYuD5nqTpsmqf"
-                  title="Sertab Erener SAYGI1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
-              
-              {/* Sertab Katılımcı Listesi */}
-              <div className="space-y-4">
-                {/* Sanatçılar Akordiyon */}
-                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                  <button
-                    onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
-                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                  >
-                    <span>Sertab Erener - SAYGI1 Sanatçılar</span>
-                    <FaChevronDown
-                      className={`transform transition-transform duration-300 ${
-                        isSertabParticipantsOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  
-                  {isSertabParticipantsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
+            {/* Sertab Erener Bölümü */}
+            <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+              <motion.h3
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-2xl md:text-3xl font-bold text-center text-white mb-8"
+              >
+                SAYGI1 - Sertab Erener
+              </motion.h3>
+
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="space-y-4"
+              >
+                <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/kvSaawzWcVU?si=AvQmYuD5nqTpsmqf"
+                    title="Sertab Erener SAYGI1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+                
+                {/* Sertab Katılımcı Listesi */}
+                <div className="space-y-4">
+                  {/* Sanatçılar Akordiyon */}
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                    <button
+                      onClick={() => setIsSertabParticipantsOpen(!isSertabParticipantsOpen)}
+                      className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                     >
-                      <ul className="space-y-1 text-white">
-                        <li>Aleyna Tilki</li>
-                        <li>Can Ozan</li>
-                        <li>Ceylan Ertem</li>
-                        <li>Emir Can İğrek (Video ile Katıldı)</li>
-                        <li>Gökhan Türkmen</li>
-                        <li>Kalben</li>
-                        <li>Karsu</li>
-                        <li>Kenan Doğulu</li>
-                        <li>Levent Yüksel</li>
-                        <li>Melek Mosso</li>
-                        <li>Mirkelam</li>
-                        <li>Nil Karaibrahimgil</li>
-                        <li>Nova Norda</li>
-                        <li>Paptircem</li>
-                        <li>Şanışer</li>
-                        <li>Selin Geçit</li>
-                        <li>Sena Şener</li>
-                        <li>Soner Sarıkabadayı</li>
-                        <li>TNK</li>
-                      </ul>
-                    </motion.div>
-                  )}
+                      <span>SAYGI1 - Sertab Erener Sanatçılar</span>
+                      <FaChevronDown
+                        className={`transform transition-transform duration-300 ${
+                          isSertabParticipantsOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {isSertabParticipantsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ul className="space-y-1 text-white">
+                          <li>Aleyna Tilki</li>
+                          <li>Can Ozan</li>
+                          <li>Ceylan Ertem</li>
+                          <li>Doğukan Manço</li>
+                          <li>Emir Can İğrek</li>
+                          <li>Gökhan Türkmen</li>
+                          <li>Kalben</li>
+                          <li>Karsu</li>
+                          <li>Kenan Doğulu</li>
+                          <li>Levent Yüksel</li>
+                          <li>Melek Mosso</li>
+                          <li>Mirkelam</li>
+                          <li>Nil Karaibrahimgil & Serdar Erener</li>
+                          <li>Nova Norda</li>
+                          <li>Oğuzhan Uğur</li>
+                          <li>Paptircem</li>
+                          <li>Şanışer</li>
+                          <li>Şara Kaplan</li>
+                          <li>Selin Geçit</li>
+                          <li>Soner Sarıkabadayı</li>
+                          <li>TNK</li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
+
+                  {/* Sunucular Akordiyon */}
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                    <button
+                      onClick={() => setIsSertabHostsOpen(!isSertabHostsOpen)}
+                      className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
+                    >
+                      <span>SAYGI1 - Sertab Erener Sunucular</span>
+                      <FaChevronDown
+                        className={`transform transition-transform duration-300 ${
+                          isSertabHostsOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {isSertabHostsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ul className="space-y-1 text-white">
+                          <li>Arda Türkmen</li>
+                          <li>Bilal Yıldız</li>
+                          <li>Cem Gelinoğlu</li>
+                          <li>Danla Bilic</li>
+                          <li>Didem Soydan</li>
+                          <li>Emre Yücelen</li>
+                          <li>Enis Arıkan</li>
+                          <li>Gökçe</li>
+                          <li>Gökhan Çınar</li>
+                          <li>Gülşah Saraçoğlu</li>
+                          <li>Hayrettin</li>
+                          <li>Hikayeden Adamlar</li>
+                          <li>Mehmet Yalçınkaya</li>
+                          <li>Sarp Bozkurt</li>
+                          <li>Somer Sivrioğlu</li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Ceza Bölümü */}
+            <div className="bg-black/20 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+              <motion.h3
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-2xl md:text-3xl font-bold text-center text-white mb-8"
+              >
+                SAYGI1 - Ceza
+              </motion.h3>
+
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="space-y-4"
+              >
+                <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/Zpgof8hgszg?si=FupWFEZeIjaGSYv4"
+                    title="Ceza SAYGI1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
                 </div>
 
-                {/* Sunucular Akordiyon */}
-                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                  <button
-                    onClick={() => setIsSertabHostsOpen(!isSertabHostsOpen)}
-                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                  >
-                    <span>Sertab Erener - SAYGI1 Sunucular</span>
-                    <FaChevronDown
-                      className={`transform transition-transform duration-300 ${
-                        isSertabHostsOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  
-                  {isSertabHostsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
+                {/* Ceza Katılımcı Listesi */}
+                <div className="space-y-4">
+                  {/* Sanatçılar Akordiyon */}
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                    <button
+                      onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
+                      className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                     >
-                      <ul className="space-y-1 text-white">
-                        <li>Arda Türkmen</li>
-                        <li>Berk Uçar</li>
-                        <li>Bilal Vildi</li>
-                        <li>Cem Gelinoğlu</li>
-                        <li>Danla Bilic</li>
-                        <li>Didem Soydan</li>
-                        <li>Emre Yücelen</li>
-                        <li>Enis Arıkan</li>
-                        <li>Gökçe</li>
-                        <li>Gökhan Çınar</li>
-                        <li>Gülşah Saraçoğlu</li>
-                        <li>Hayrettin</li>
-                        <li>Hikayeden Adamlar</li>
-                        <li>İbrahim Selim</li>
-                        <li>İpek Filiz Yazıcı</li>
-                        <li>Mehmet Yalçınkaya</li>
-                        <li>Melisa Döngel</li>
-                        <li>Oğuzhan Uğur & 9 Kişi</li>
-                        <li>Ömür Ufuk Beydemir</li>
-                        <li>Sarp Bozkurt</li>
-                        <li>Somer Sivrioğlu</li>
-                      </ul>
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+                      <span>SAYGI1 - Ceza Sanatçılar</span>
+                      <FaChevronDown
+                        className={`transform transition-transform duration-300 ${
+                          isCezaParticipantsOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {isCezaParticipantsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ul className="space-y-1 text-white">
+                          <li>Anıl Piyancı</li>
+                          <li>Ayben</li>
+                          <li>Baneva</li>
+                          <li>Candan Erçetin</li>
+                          <li>Cartel/Erci E</li>
+                          <li>Cakal</li>
+                          <li>Gazapizm</li>
+                          <li>Gripin</li>
+                          <li>Killa Hakan</li>
+                          <li>Lil Begy</li>
+                          <li>M Lisa</li>
+                          <li>Manga</li>
+                          <li>Oğuzhan Uğur</li>
+                          <li>Ozbi</li>
+                          <li>Sefo</li>
+                          <li>Server Uraz</li>
+                          <li>Şehinşah</li>
+                          <li>Yener Çevik</li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
 
-            {/* Ceza Video */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="space-y-4"
-            >
-              <div className="aspect-video w-full rounded-xl overflow-hidden shadow-2xl">
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/Zpgof8hgszg?si=FupWFEZeIjaGSYv4"
-                  title="Ceza SAYGI1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full h-full"
-                />
-              </div>
-
-              {/* Ceza Katılımcı Listesi */}
-              <div className="space-y-4">
-                {/* Sanatçılar Akordiyon */}
-                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                  <button
-                    onClick={() => setIsCezaParticipantsOpen(!isCezaParticipantsOpen)}
-                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                  >
-                    <span>Ceza - SAYGI1 Sanatçılar</span>
-                    <FaChevronDown
-                      className={`transform transition-transform duration-300 ${
-                        isCezaParticipantsOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  
-                  {isCezaParticipantsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
+                  {/* Sunucular Akordiyon */}
+                  <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
+                    <button
+                      onClick={() => setIsCezaHostsOpen(!isCezaHostsOpen)}
+                      className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
                     >
-                      <ul className="space-y-1 text-white">
-                        <li>Anıl Piyancı</li>
-                        <li>Ayben</li>
-                        <li>Baneva</li>
-                        <li>Candan Erçetin</li>
-                        <li>Cartel/Erci E</li>
-                        <li>Çakal</li>
-                        <li>Gazapizm</li>
-                        <li>Gripin</li>
-                        <li>Killa Hakan</li>
-                        <li>Lil Begy</li>
-                        <li>M Lisa</li>
-                        <li>Manga</li>
-                        <li>Ozbi</li>
-                        <li>Sefo</li>
-                        <li>Server Uraz</li>
-                        <li>Şehinşah</li>
-                        <li>Yener Çevik</li>
-                      </ul>
-                    </motion.div>
-                  )}
+                      <span>SAYGI1 - Ceza Sunucular</span>
+                      <FaChevronDown
+                        className={`transform transition-transform duration-300 ${
+                          isCezaHostsOpen ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    
+                    {isCezaHostsOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ul className="space-y-1 text-white">
+                          <li>Ali Biçim</li>
+                          <li>Arem & Arman</li>
+                          <li>Berk Keklik</li>
+                          <li>Beyazıt Öztürk</li>
+                          <li>Bilal Yıldız</li>
+                          <li>Burcu Erenkul</li>
+                          <li>Doğu Demirkol</li>
+                          <li>Doğukan Manço</li>
+                          <li>Emre Karayel</li>
+                          <li>Eser Yenenler</li>
+                          <li>Haruncan</li>
+                          <li>İlker Ayrık</li>
+                          <li>Mesutcan Tomay</li>
+                          <li>Nurgül Yeşilçay</li>
+                          <li>Ogün Sanlısoy</li>
+                          <li>Özlem Gürses</li>
+                          <li>Pınar Sabancı</li>
+                          <li>Timur Acar</li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div>
                 </div>
-
-                {/* Sunucular Akordiyon */}
-                <div className="bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-yellow-500/20">
-                  <button
-                    onClick={() => setIsCezaHostsOpen(!isCezaHostsOpen)}
-                    className="w-full flex items-center justify-between text-xl font-bold text-white mb-4"
-                  >
-                    <span>Ceza - SAYGI1 Sunucular</span>
-                    <FaChevronDown
-                      className={`transform transition-transform duration-300 ${
-                        isCezaHostsOpen ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
-                  
-                  {isCezaHostsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <ul className="space-y-1 text-white">
-                        <li>Ali Biçim</li>
-                        <li>Arem & Arman</li>
-                        <li>Berk Keklik</li>
-                        <li>Beyazıt Öztürk (Video ile Katılmıştır)</li>
-                        <li>Bilal Yıldız</li>
-                        <li>Burcu Erenkul</li>
-                        <li>Doğu Demirkol</li>
-                        <li>Doğukan Manço</li>
-                        <li>Emre Karayel</li>
-                        <li>Eser Yenenler</li>
-                        <li>Haruncan</li>
-                        <li>İlker Ayrık</li>
-                        <li>Mesutcan Tomay</li>
-                        <li>Nurgül Yeşilçay</li>
-                        <li>Ogün Sanlısoy (Video ile Katılmıştır)</li>
-                        <li>Özlem Gürses</li>
-                        <li>Pınar Sabancı</li>
-                        <li>Timur Acar</li>
-                      </ul>
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
